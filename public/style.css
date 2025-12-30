@@ -1,0 +1,529 @@
+/* 1. Global Reset & Body Background */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    /* พื้นหลัง Gradient สีม่วง-น้ำเงิน ตามแบบ */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 2rem;
+    color: #333;
+    display: flex;
+    justify-content: center;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 950px;
+    /* ความกว้างคอนเทนเนอร์ */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* 2. Card General Style */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    /* เงานุ่มๆ */
+    padding: 2rem;
+    width: 100%;
+    transition: transform 0.2s;
+}
+
+/* 3. Header Section */
+.header-card {
+    text-align: center;
+    border-top: 5px solid #ff9f43;
+    /* เส้นสีส้มด้านบน */
+    padding: 1.5rem;
+}
+
+.header-card h1 {
+    font-size: 1.8rem;
+    color: #2d3436;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.header-card i {
+    color: #e67e22;
+}
+
+.header-card p {
+    color: #636e72;
+    font-size: 0.9rem;
+}
+
+/* 4. Form Section */
+.card-header {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h2 {
+    font-size: 1.3rem;
+    color: #2d3436;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-header h2 i {
+    color: #6c5ce7;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #2d3436;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dfe6e9;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #fafafa;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #6c5ce7;
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+    outline: none;
+    background-color: white;
+}
+
+/* ฟอร์ม 2 คอลัมน์ Status + Priority */
+.two-cols {
+    display: flex;
+    gap: 1rem;
+}
+
+.two-cols .form-field {
+    flex: 1;
+}
+
+.btn-submit {
+    background-color: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-submit:hover {
+    background-color: #5b4bc4;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+/* 5. Filter Section (ด้านบนของ All Tasks) */
+.filter-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-wrapper select {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #dfe6e9;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+/* Grid Layout สำหรับ Tasks (กรณีใช้ที่อื่น) */
+.task-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Task Card (ใช้ทั้ง list แบบเดิมและ Trello board) */
+.task-item,
+.task-card {
+    background: #f8f9fa;
+    border: 1px solid #eee;
+    padding: 1.5rem;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s;
+    border-left: 5px solid #ccc;
+    /* Default border */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 140px;
+}
+
+/* hover: ไม่ทับสี background ตามสถานะ */
+.task-item:hover,
+.task-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Title + Description */
+.task-item h3,
+.task-card-content h3 {
+    font-size: 1.0rem;
+    margin-bottom: 0.5rem;
+    color: #2d3436;
+    padding-right: 20px;
+    /* เผื่อพื้นที่ให้ Badge */
+}
+
+.task-item p,
+.task-card-content p {
+    font-size: 0.9rem;
+    color: #636e72;
+    margin-bottom: 1.0rem;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+/* Badge มุมขวาบน = แสดงสถานะ */
+.task-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* สี Badge ตามสถานะ */
+.badge-todo {
+    background-color: #fdcb6e;
+    color: #d35400;
+}
+
+.badge-progress {
+    background-color: #ffcc80;
+    color: #e67e22;
+}
+
+.badge-done {
+    background-color: #2ecc71;
+    color: #145a32;
+}
+
+/* สีขอบด้านซ้ายตามสถานะ */
+.task-item.border-todo,
+.task-card.border-todo {
+    border-left-color: #fdcb6e;
+}
+
+.task-item.border-progress,
+.task-card.border-progress {
+    border-left-color: #ffcc80;
+}
+
+.task-item.border-done,
+.task-card.border-done {
+    border-left-color: #2ecc71;
+}
+
+/* 🎨 พื้นหลังการ์ดตามสถานะ + hover เข้มขึ้น */
+.task-card.border-todo {
+    background-color: #fff7e6;
+}
+
+.task-card.border-progress {
+    background-color: #fff3e0;
+}
+
+.task-card.border-done {
+    background-color: #e8f8f1;
+}
+
+.task-card.border-todo:hover {
+    background-color: #ffe9c4;
+}
+
+.task-card.border-progress:hover {
+    background-color: #ffe0bf;
+}
+
+.task-card.border-done:hover {
+    background-color: #d5f1e3;
+}
+
+/* 🎯 ไอคอนสถานะซ้ายบน การ์ด */
+.task-card {
+    padding-left: 2.7rem;
+    /* เว้นที่ให้ icon bubble */
+}
+
+.task-card::before {
+    content: "";
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 0.9rem;
+    color: #fff;
+}
+
+/* content + สีตามสถานะ */
+.task-card.border-todo::before {
+    content: "\f46d";
+    /* fa-clipboard-list */
+    background-color: #f39c12;
+}
+
+.task-card.border-progress::before {
+    content: "\f110";
+    /* fa-spinner */
+    background-color: #e67e22;
+}
+
+.task-card.border-done::before {
+    content: "\f058";
+    /* fa-check-circle */
+    background-color: #27ae60;
+}
+
+/* ⭐ Priority Badge ใต้หัวข้อ */
+.task-card-meta {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 0.6rem;
+}
+
+.priority-badge {
+    font-size: 0.7rem;
+    padding: 4px 9px;
+    border-radius: 999px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.priority-high {
+    background-color: #ff7675;
+    color: #fff;
+}
+
+.priority-medium {
+    background-color: #f6b93b;
+    color: #4a2b00;
+}
+
+.priority-low {
+    background-color: #74b9ff;
+    color: #0c2461;
+}
+
+/* ปุ่มลบ */
+.btn-delete {
+    background-color: #ff7675;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    align-self: flex-start;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-delete:hover {
+    background-color: #d63031;
+}
+
+/* ปุ่มย้ายสถานะ – ถ้ายังใช้ในที่อื่น */
+.move-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.btn-move {
+    border: none;
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    background-color: #dfe6e9;
+    color: #2d3436;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.btn-move:hover {
+    background-color: #6c5ce7;
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(108, 92, 231, 0.3);
+}
+
+/* Responsive – ส่วน header + filter + ฟอร์ม */
+@media (max-width: 768px) {
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .filter-wrapper {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .two-cols {
+        flex-direction: column;
+    }
+}
+
+/* 🔹 Trello Board Layout */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+/* กล่องคอลัมน์หลัก */
+.board-column {
+    background: #f8f9fb;
+    border-radius: 12px;
+    border: 1px solid #e1e5ee;
+    display: flex;
+    flex-direction: column;
+    max-height: 550px;
+    overflow: hidden;
+}
+
+/* Header = กล่องสรุปด้านบนของแต่ละคอลัมน์ */
+.board-column-header {
+    padding: 1.1rem 1.3rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    border-radius: 12px 12px 0 0;
+}
+
+.board-header-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.board-header-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.board-header-title i {
+    font-size: 1rem;
+}
+
+.board-header-count {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+/* สีหัวคอลัมน์ให้เหมือนกล่องสรุปเดิม */
+.header-todo {
+    background-color: #ffeaa7;
+    color: #d35400;
+    box-shadow: 0 4px 0 #fdcb6e;
+}
+
+.header-progress {
+    background-color: #ffe0b2;
+    color: #e67e22;
+    box-shadow: 0 4px 0 #ffcc80;
+}
+
+.header-done {
+    background-color: #c8f7c5;
+    color: #27ae60;
+    box-shadow: 0 4px 0 #2ecc71;
+}
+
+/* พื้นที่ list งานในแต่ละคอลัมน์ */
+.board-column-body {
+    padding: 0.9rem;
+    overflow-y: auto;
+    min-height: 80px;
+    background: #f8f9fb;
+}
+
+/* hover ตอนลากเข้า */
+.board-column-body.drop-hover {
+    background-color: #e3f2fd;
+}
+
+/* footer การ์ด */
+.task-card-footer {
+    margin-top: 0.8rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* placeholder ตอนไม่มีงาน */
+.empty-placeholder {
+    text-align: center;
+    color: #999;
+    padding: 1.5rem 0.5rem;
+    font-size: 0.9rem;
+}
+
+.empty-placeholder i {
+    font-size: 1.6rem;
+    margin-bottom: 0.4rem;
+}
+
+/* Responsive – Board */
+@media (max-width: 900px) {
+    .board {
+        grid-template-columns: 1fr;
+    }
+}

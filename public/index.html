@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Board - Client Server</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:,">
+</head>
+
+<body>
+
+    <div class="main-container">
+
+        <!-- Header -->
+        <header class="card header-card">
+            <h1><i class="fas fa-clipboard-list"></i> Task Board</h1>
+            <p>Client–Server Architecture Demo - Week 3-5</p>
+        </header>
+
+        <!-- Add Task -->
+        <section class="card form-card">
+            <div class="card-header">
+                <h2><i class="fas fa-plus-circle"></i> Add New Task</h2>
+            </div>
+
+            <form id="taskForm">
+                <div class="form-group">
+                    <label>Task Title <span style="color:red">*</span></label>
+                    <input type="text" id="taskTitle" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="taskDesc" rows="3"></textarea>
+                </div>
+
+                <div class="form-group two-cols">
+                    <div class="form-field">
+                        <label>Status</label>
+                        <select id="taskStatus">
+                            <option value="To Do">To Do</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Done">Done</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Priority</label>
+                        <select id="taskPriority">
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-save"></i> Add Task
+                </button>
+            </form>
+        </section>
+
+        <!-- Task Board -->
+        <section class="card list-card">
+            <div class="card-header">
+                <h2><i class="fas fa-th-large"></i> All Tasks</h2>
+                <div class="filter-wrapper">
+                    <label><i class="fas fa-filter"></i> Filter by:</label>
+                    <select id="filterStatus">
+                        <option value="All">All Tasks</option>
+                        <option value="To Do">To Do</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Done">Done</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="board">
+
+                <div class="board-column" data-status="To Do">
+                    <div class="board-column-header header-todo">
+                        <span>To Do</span>
+                        <span id="count-todo">0</span>
+                    </div>
+                    <div class="board-column-body" id="col-todo"></div>
+                </div>
+
+                <div class="board-column" data-status="In Progress">
+                    <div class="board-column-header header-progress">
+                        <span>In Progress</span>
+                        <span id="count-progress">0</span>
+                    </div>
+                    <div class="board-column-body" id="col-inprogress"></div>
+                </div>
+
+                <div class="board-column" data-status="Done">
+                    <div class="board-column-header header-done">
+                        <span>Done</span>
+                        <span id="count-done">0</span>
+                    </div>
+                    <div class="board-column-body" id="col-done"></div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts (ลำดับสำคัญมาก) -->
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>
