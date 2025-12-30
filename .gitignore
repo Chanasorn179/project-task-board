@@ -1,0 +1,45 @@
+# =========================
+# Node.js
+# =========================
+node_modules/
+
+# npm / yarn logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# Environment variables
+# =========================
+.env
+
+# =========================
+# Database files
+# =========================
+*.db
+*.sqlite
+*.sqlite3
+
+# =========================
+# OS / Editor files
+# =========================
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+config.js
+public/config.js
+
+
+# =========================
+# Coverage / Testing
+# =========================
+coverage/
+
+# =========================
+# Build output (if any)
+# =========================
+dist/
+build/
